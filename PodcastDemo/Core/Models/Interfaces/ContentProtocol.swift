@@ -12,6 +12,7 @@ protocol ContentItem: Decodable, Identifiable {
     var name: String { get }
     var avatarUrl: String { get }
     var score: Double { get }
+    var releaseDate: String { get }
 }
 
 // MARK: - Playable Protocol

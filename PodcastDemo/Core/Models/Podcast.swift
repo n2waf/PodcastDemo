@@ -20,6 +20,9 @@ struct Podcast: ContentItem {
     let score: Double
     
     var id: String { podcastId }
+    var releaseDate: String {
+        return ""
+    }
     
     enum CodingKeys: String, CodingKey {
         case podcastId = "podcast_id"
