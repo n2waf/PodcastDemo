@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Sections: \(viewModel.sections.count)")
+            Button("Load Sections") {
+                Task {
+                    await viewModel.loadHomeSections()
+                }
+            }
+            // Display section names for testing
+            List(viewModel.sections) { section in
+                Text(section.info.name)
+            }
         }
-        .padding()
+        .onAppear {
+            Task {
+                await viewModel.loadHomeSections()
+            }
+        }
     }
 }
 
