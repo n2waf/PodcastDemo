@@ -28,26 +28,17 @@ struct SectionView: View {
     @ViewBuilder
     func queueSection() -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Queue")
-                .font(.title2)
-                .fontWeight(.bold)
-                .padding(.horizontal, 16)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 0) {
-                    ForEach(Array(section.items.enumerated()), id: \.offset) { index, item in
-                        QueueCardView(
-                            imageURL: item.avatarUrl,
-                            title: item.name,
-                            releaseDate: item.releaseDate
-                        )
-                        .padding()
-                        .containerRelativeFrame(.horizontal)
-                        .scrollTargetLayout()
-                    }
-                }
+            HStack {
+                Text("Queue")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.horizontal, 16)
+                Spacer()
+                Text("\(section.itemCount) Episodes")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
-            .scrollTargetBehavior(.paging)
+            QueueCardView(items: section.items)
         }
     }
 }
