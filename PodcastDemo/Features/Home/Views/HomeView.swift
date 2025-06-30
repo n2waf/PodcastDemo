@@ -18,7 +18,6 @@ struct HomeView: View {
                         SectionView(section: section)
                     }
                 }
-                .padding()
             }
             .navigationTitle("Home")
             .onAppear {

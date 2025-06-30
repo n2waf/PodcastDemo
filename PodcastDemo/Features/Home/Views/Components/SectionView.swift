@@ -2,29 +2,52 @@
 //  SectionView.swift
 //  PodcastDemo
 //
-//  Created by Nawaf  on 30/06/2025.
+//  Created by Nawaf  on 01/07/2025.
 //
 import SwiftUI
-
 struct SectionView: View {
     let section: HomeSection
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(section.info.name)
+            switch section {
+            case .podcasts:
+                if section.info.displayType == .queue {
+                    queueSection()
+                }
+            case .episodes:
+                EmptyView()
+            case .audioBooks:
+                EmptyView()
+            case .audioArticles:
+                EmptyView()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func queueSection() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Queue")
                 .font(.title2)
                 .fontWeight(.bold)
+                .padding(.horizontal, 16)
+            
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 12) {
+                LazyHStack(spacing: 0) {
                     ForEach(Array(section.items.enumerated()), id: \.offset) { index, item in
-                        ContentItemView(
+                        QueueCardView(
                             imageURL: item.avatarUrl,
-                            title: item.name
+                            title: item.name,
+                            releaseDate: item.releaseDate
                         )
+                        .padding()
+                        .containerRelativeFrame(.horizontal)
+                        .scrollTargetLayout()
                     }
                 }
-                .padding(.horizontal, 2)
             }
+            .scrollTargetBehavior(.paging)
         }
     }
 }
