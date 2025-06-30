@@ -14,6 +14,29 @@ enum SectionDisplayType: String, Codable {
     case bigSquare = "big_square"
     case twoLinesGrid = "2_lines_grid"
     case queue
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(String.self)
+        
+        switch value {
+        case "square":
+            self = .square
+        case "big_square", "big square": 
+            self = .bigSquare
+        case "2_lines_grid":
+            self = .twoLinesGrid
+        case "queue":
+            self = .queue
+        default:
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Cannot initialize SectionDisplayType from invalid String value \(value)"
+                )
+            )
+        }
+    }
 }
 
 // MARK: - Content Type Enum

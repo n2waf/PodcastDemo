@@ -6,14 +6,13 @@
 //
 import Foundation
 
-struct AudioArticle: PlayableContent {
+struct AudioArticle: ContentItem {
     let articleId: String
     let name: String
     let authorName: String
     let description: String
     let avatarUrl: String
     let duration: Int
-    let audioUrl: String
     let releaseDate: String
     let score: Double
     
@@ -26,7 +25,6 @@ struct AudioArticle: PlayableContent {
         case description
         case avatarUrl = "avatar_url"
         case duration
-        case audioUrl = "audio_url"
         case releaseDate = "release_date"
         case score
     }
