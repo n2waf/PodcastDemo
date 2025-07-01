@@ -18,7 +18,7 @@ struct SectionView: View {
             case .bigSquare:
                 bigSquareSection()
             case .twoLinesGrid:
-                EmptyView()
+                twoLinesGridSection()
             }
         }
     }
@@ -71,6 +71,18 @@ struct SectionView: View {
                     .foregroundColor(.secondary)
             }
             QueueCardView(items: section.items)
+        }
+    }
+    
+    @ViewBuilder
+    func twoLinesGridSection() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(section.info.name)
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.horizontal, 16)
+            
+            TwoLinesGridView(items: section.items)
         }
     }
 }
