@@ -17,6 +17,25 @@ struct HomeView: View {
                     ForEach(viewModel.sections) { section in
                         SectionView(section: section)
                     }
+                    
+                    if viewModel.hasMorePages {
+                        Color.clear
+                            .frame(height: 1)
+                            .onAppear {
+                                Task {
+                                    await viewModel.loadMoreSectionsIfNeeded()
+                                }
+                            }
+                    }
+                    
+                    if viewModel.isLoadingMore {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                        .padding()
+                    }
                 }
             }
             .navigationTitle("Home")

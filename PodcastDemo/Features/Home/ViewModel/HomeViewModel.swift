@@ -11,17 +11,67 @@ import Combine
 class HomeViewModel: ObservableObject {
     
     @Published var sections: [HomeSection] = []
+    @Published var isLoading = false
+    @Published var isLoadingMore = false
+    @Published var hasMorePages = true
     
     private let networkManager = NetworkManager.shared
+    private var currentPage = 1
+    private var totalPages = 1
+    private var isCurrentlyLoading = false
     
     func loadHomeSections() async {
-        guard let url = APIEndpoints.homeSectionsURL() else { return }
+        guard !isCurrentlyLoading else { return }
+        
+        isCurrentlyLoading = true
+        isLoading = true
+        currentPage = 1
+        
+        await fetchSections(page: currentPage, isInitialLoad: true)
+        
+        isLoading = false
+        isCurrentlyLoading = false
+    }
+    
+    func loadMoreSectionsIfNeeded() async {
+        guard !isCurrentlyLoading,
+              hasMorePages,
+              !isLoadingMore else {
+            return
+        }
+        
+        isCurrentlyLoading = true
+        isLoadingMore = true
+        
+        let nextPage = currentPage + 1
+        await fetchSections(page: nextPage, isInitialLoad: false)
+        
+        isLoadingMore = false
+        isCurrentlyLoading = false
+    }
+    
+    private func fetchSections(page: Int, isInitialLoad: Bool) async {
+        guard let url = APIEndpoints.homeSectionsURL(page: page) else {
+            print("Invalid URL")
+            return
+        }
         
         do {
             let response = try await networkManager.fetch(HomeResponse.self, from: url)
-            sections = sortSectionsWithQueueFirst(response.sections)
+            
+            if isInitialLoad {
+                sections = sortSectionsWithQueueFirst(response.sections)
+            } else {
+                let newSections = sortSectionsWithQueueFirst(response.sections)
+                sections.append(contentsOf: newSections)
+            }
+            
+            currentPage = page
+            totalPages = response.pagination.totalPages
+            hasMorePages = currentPage < totalPages
+            
         } catch {
-            print("Error loading sections: \(error)")
+            print(error.localizedDescription)
         }
     }
     
@@ -31,7 +81,6 @@ class HomeViewModel: ObservableObject {
         
         let sortedQueueSections = queueSections.sorted { $0.info.order < $1.info.order }
         let sortedOtherSections = otherSections.sorted { $0.info.order < $1.info.order }
-        
         
         return sortedQueueSections + sortedOtherSections
     }
