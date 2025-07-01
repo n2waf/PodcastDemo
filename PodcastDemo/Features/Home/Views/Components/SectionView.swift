@@ -16,7 +16,7 @@ struct SectionView: View {
             case .square:
                 squareSection()
             case .bigSquare:
-                EmptyView()
+                bigSquareSection()
             case .twoLinesGrid:
                 EmptyView()
             }
@@ -45,6 +45,17 @@ struct SectionView: View {
         }
     }
     
+    @ViewBuilder
+    func bigSquareSection() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(section.info.name)
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.horizontal, 16)
+            
+            BigSquareCardView(items: section.items)
+        }
+    }
     
     @ViewBuilder
     func queueSection() -> some View {
