@@ -9,8 +9,19 @@ import Foundation
 
 struct MockData {
     
-    // MARK: - Sample Models
+    // MARK: - Network Response
     
+    static let sampleURL: URL = URL(string: "https://test.com")!
+    
+    static let sample200HTTPURLResponse: HTTPURLResponse = HTTPURLResponse(
+        url: sampleURL,
+        statusCode: 200,
+        httpVersion: nil,
+        headerFields: nil
+    )!
+    
+    
+    // MARK: - Sample Models
     static let samplePodcast = Podcast(
         podcastId: "1612459752",
         name: "State of the World from NPR",
