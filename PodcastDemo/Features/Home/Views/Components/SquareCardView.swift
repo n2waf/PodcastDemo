@@ -10,7 +10,6 @@ struct SquareCardView: View {
     let imageURL: String
     let title: String
     let subtitle: String
-//    let duration: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -26,41 +25,8 @@ struct SquareCardView: View {
                 .frame(width: 160, height: 160)
                 .cornerRadius(16)
                 .clipped()
-                
-                VStack {
-                    HStack {
-                        Image(systemName: "flame.fill")
-                            .foregroundColor(.white)
-                            .font(.system(size: 16))
-                            .padding(8)
-                            .background(Color.black.opacity(0.3))
-                            .clipShape(Circle())
-                        
-                        Spacer()
-                    }
-                    Spacer()
-                }
-                .padding(12)
-                
-                // Duration badge at bottom
-//                VStack {
-//                    Spacer()
-//                    HStack {
-//                        Spacer()
-//                        Text(duration)
-//                            .font(.caption)
-//                            .fontWeight(.medium)
-//                            .foregroundColor(.white)
-//                            .padding(.horizontal, 8)
-//                            .padding(.vertical, 4)
-//                            .background(Color.black.opacity(0.7))
-//                            .cornerRadius(8)
-//                    }
-//                }
-//                .padding(12)
             }
             
-            // Title and subtitle
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.subheadline)
