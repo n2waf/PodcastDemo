@@ -7,7 +7,7 @@
 import Foundation
 
 // MARK: - Episode Type Enum
-enum EpisodeType: String, Decodable {
+enum EpisodeType: String, Codable {
     case full
     case trailer
     case bonus
@@ -49,7 +49,7 @@ struct Episode: ContentItem {
     var id: String { episodeId }
     
     // MARK: - Chapter
-    struct Chapter: Decodable {
+    struct Chapter: Codable {
         let title: String
         let startTime: Int
         let endTime: Int

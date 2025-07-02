@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Content Types Protocol
-protocol ContentItem: Decodable, Identifiable {
+protocol ContentItem: Codable, Identifiable {
     var name: String { get }
     var avatarUrl: String { get }
     var score: Double { get }

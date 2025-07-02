@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Section Display Type Enum
+// MARK: - Section Display Type
 enum SectionDisplayType: String, Codable {
     case square
     case bigSquare = "big_square"
@@ -39,7 +39,7 @@ enum SectionDisplayType: String, Codable {
     }
 }
 
-// MARK: - Content Type Enum
+// MARK: - Content Type
 enum ContentType: String, Codable {
     case podcast
     case episode
@@ -48,13 +48,13 @@ enum ContentType: String, Codable {
 }
 
 // MARK: - Home Section
-enum HomeSection: Identifiable {
+enum HomeSection: Codable, Identifiable {
     case podcasts(SectionInfo, [Podcast])
     case episodes(SectionInfo, [Episode])
     case audioBooks(SectionInfo, [AudioBook])
     case audioArticles(SectionInfo, [AudioArticle])
     
-    struct SectionInfo {
+    struct SectionInfo: Codable {
         let name: String
         let displayType: SectionDisplayType
         let order: Int
@@ -86,11 +86,13 @@ enum HomeSection: Identifiable {
             return items.count
         }
     }
+    
 }
 
 // MARK: - Custom Decoding Strategy
-extension HomeSection: Decodable {
-    private enum CodingKeys: String, CodingKey {
+extension HomeSection {
+    
+    private enum CodingKeys: String, CodingKey, Codable {
         case name
         case type
         case contentType = "content_type"
@@ -131,16 +133,43 @@ extension HomeSection: Decodable {
             self = .audioArticles(sectionInfo, audioArticles)
         }
     }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        let info = self.info
+        try container.encode(info.name, forKey: .name)
+        try container.encode(info.displayType, forKey: .type)
+        try container.encode(info.order, forKey: .order)
+        
+        switch self {
+        case .podcasts(_, let podcasts):
+            try container.encode(ContentType.podcast, forKey: .contentType)
+            try container.encode(podcasts, forKey: .content)
+            
+        case .episodes(_, let episodes):
+            try container.encode(ContentType.episode, forKey: .contentType)
+            try container.encode(episodes, forKey: .content)
+            
+        case .audioBooks(_, let audioBooks):
+            try container.encode(ContentType.audioBook, forKey: .contentType)
+            try container.encode(audioBooks, forKey: .content)
+            
+        case .audioArticles(_, let audioArticles):
+            try container.encode(ContentType.audioArticle, forKey: .contentType)
+            try container.encode(audioArticles, forKey: .content)
+        }
+    }
 }
 
 // MARK: - Home Response
-struct HomeResponse: Decodable {
+struct HomeResponse: Codable {
     let sections: [HomeSection]
     let pagination: Pagination
 }
 
 // MARK: - Pagination
-struct Pagination: Decodable {
+struct Pagination: Codable {
     let nextPage: String?
     let totalPages: Int
     

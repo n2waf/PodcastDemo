@@ -15,7 +15,7 @@ class NetworkManager {
         self.session = URLSession.shared
     }
     
-    func fetch<T: Decodable>(_ type: T.Type, from url: URL) async throws -> T {
+    func fetch<T: Codable>(_ type: T.Type, from url: URL) async throws -> T {
         do {
             let (data, response) = try await session.data(from: url)
             
