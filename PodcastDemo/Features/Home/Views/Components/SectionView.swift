@@ -6,7 +6,7 @@
 //
 import SwiftUI
 struct SectionView: View {
-    let section: HomeSection
+    let section: Section
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {

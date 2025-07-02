@@ -91,8 +91,8 @@ struct MockData {
     
     // MARK: - Sample Sections
     
-    static let samplePodcastSection = HomeSection.podcasts(
-        HomeSection.SectionInfo(
+    static let samplePodcastSection = Section.podcasts(
+        Section.SectionInfo(
             name: "Top Podcasts",
             displayType: .square,
             order: 1
@@ -100,8 +100,8 @@ struct MockData {
         [samplePodcast]
     )
     
-    static let sampleEpisodeSection = HomeSection.episodes(
-        HomeSection.SectionInfo(
+    static let sampleEpisodeSection = Section.episodes(
+        Section.SectionInfo(
             name: "Trending Episodes",
             displayType: .twoLinesGrid,
             order: 2
@@ -109,8 +109,8 @@ struct MockData {
         [sampleEpisode]
     )
     
-    static let sampleAudioBookSection = HomeSection.audioBooks(
-        HomeSection.SectionInfo(
+    static let sampleAudioBookSection = Section.audioBooks(
+        Section.SectionInfo(
             name: "Bestselling Audiobooks",
             displayType: .bigSquare,
             order: 3
@@ -118,8 +118,8 @@ struct MockData {
         [sampleAudioBook]
     )
     
-    static let sampleQueueSection = HomeSection.podcasts(
-        HomeSection.SectionInfo(
+    static let sampleQueueSection = Section.podcasts(
+        Section.SectionInfo(
             name: "New Podcasts",
             displayType: .queue,
             order: 5
@@ -156,8 +156,8 @@ struct MockData {
     
     static let homeResponsePage2 = HomeResponse(
         sections: [
-            HomeSection.audioArticles(
-                HomeSection.SectionInfo(
+            Section.audioArticles(
+                Section.SectionInfo(
                     name: "Must-Read Audio Articles",
                     displayType: .square,
                     order: 4
@@ -286,8 +286,8 @@ struct MockData {
         displayType: SectionDisplayType = .square,
         order: Int = 1,
         contentType: ContentType = .podcast
-    ) -> HomeSection {
-        let info = HomeSection.SectionInfo(
+    ) -> Section {
+        let info = Section.SectionInfo(
             name: name,
             displayType: displayType,
             order: order

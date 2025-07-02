@@ -7,7 +7,7 @@
 import Foundation
 
 // MARK: - HomeSection Extension
-extension HomeSection {
+extension Section {
     var items: [any ContentItem] {
         switch self {
         case .podcasts(_, let podcasts):
@@ -18,6 +18,8 @@ extension HomeSection {
             return audioBooks
         case .audioArticles(_, let audioArticles):
             return audioArticles
+            case .search(_, let searchResult):
+            return searchResult
         }
     }
 }

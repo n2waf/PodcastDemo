@@ -5,12 +5,11 @@
 //  Created by Nawaf  on 30/06/2025.
 //
 import Foundation
-import Combine
 
 @MainActor
 class HomeViewModel: ObservableObject {
     
-    @Published var sections: [HomeSection] = []
+    @Published var sections: [Section] = []
     @Published var isLoading = false
     @Published var isLoadingMore = false
     @Published var hasMorePages = true
@@ -78,7 +77,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    private func sortSectionsWithQueueFirst(_ sections: [HomeSection]) -> [HomeSection] {
+    private func sortSectionsWithQueueFirst(_ sections: [Section]) -> [Section] {
         let queueSections = sections.filter { $0.info.displayType == .queue }
         let otherSections = sections.filter { $0.info.displayType != .queue }
         
