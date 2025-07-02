@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "6DBC415D-E9E1-4421-B264-2DF76B2F5886",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "PodcastDemoUITests",
+        "PodcastDemoUITests\/testExample()",
+        "PodcastDemoUITests\/testLaunchPerformance()",
+        "PodcastDemoUITestsLaunchTests",
+        "PodcastDemoUITestsLaunchTests\/testLaunch()"
+      ],
+      "target" : {
+        "containerPath" : "container:PodcastDemo.xcodeproj",
+        "identifier" : "AD64DD572E12FA3E00E89DA8",
+        "name" : "PodcastDemoUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
