@@ -7,12 +7,11 @@
 import Foundation
 
 class NetworkManager: HTTPClient {
-    static let shared = NetworkManager()
     
     private let session: URLSession
     
-    private init() {
-        self.session = URLSession.shared
+    init(session: URLSession = URLSession.shared) {
+        self.session = session
     }
     
     func get<T: Codable>(_ type: T.Type, from api: API) async throws -> T {

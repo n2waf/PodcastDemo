@@ -15,7 +15,7 @@ class HomeViewModel: ObservableObject {
     @Published var isLoadingMore = false
     @Published var hasMorePages = true
     
-    private let networkManager = NetworkManager.shared
+    private let networkManager = NetworkManager()
     private var currentPage = 1
     private var totalPages = 1
     private var isCurrentlyLoading = false
