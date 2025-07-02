@@ -14,7 +14,7 @@ enum EpisodeType: String, Decodable {
 }
 
 // MARK: - Episode
-struct Episode: PlayableContent {
+struct Episode: ContentItem {
     let episodeId: String
     let name: String
     let seasonNumber: Int?

@@ -15,9 +15,3 @@ protocol ContentItem: Decodable, Identifiable {
     var releaseDate: String { get }
     var duration: Int { get }
 }
-
-// MARK: - Playable Protocol
-protocol PlayableContent: ContentItem {
-    var duration: Int { get }
-    var audioUrl: String { get }
-}
