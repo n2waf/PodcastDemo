@@ -85,4 +85,21 @@ final class NetworkManagerTests: XCTestCase {
             XCTFail("Unexpected error: \(error)")
         }
     }
+    
+    func test_get_throwsDecodingError_onInvalidJSON() async {
+        let badJSON = MockData.invalidJSON.data(using: .utf8) ?? Data()
+        URLProtocolStub.stub(data: badJSON,
+                             response: MockData.sample200HTTPURLResponse,
+                             error: nil)
+
+        do {
+            _ = try await NetworkManager.makeStubbed().get(HomeResponse.self,
+                                                           from: .home(page: 1))
+            XCTFail("Expected to throw .decodingError")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .decodingError)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
 }
