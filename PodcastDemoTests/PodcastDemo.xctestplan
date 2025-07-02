@@ -23,14 +23,6 @@
         "identifier" : "AD64DD4D2E12FA3E00E89DA8",
         "name" : "PodcastDemoTests"
       }
-    },
-    {
-      "enabled" : false,
-      "target" : {
-        "containerPath" : "container:PodcastDemo.xcodeproj",
-        "identifier" : "AD64DD572E12FA3E00E89DA8",
-        "name" : "PodcastDemoUITests"
-      }
     }
   ],
   "version" : 1

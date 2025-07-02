@@ -29,6 +29,23 @@
 		AD64DD582E12FA3E00E89DA8 /* PodcastDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AD64DEB82E15CB2D00E89DA8 /* Exceptions for "PodcastDemoTests" folder in "PodcastDemo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PodcastDemo.xctestplan,
+			);
+			target = AD64DD3D2E12FA3D00E89DA8 /* PodcastDemo */;
+		};
+		AD64DEB92E15CB2D00E89DA8 /* Exceptions for "PodcastDemoTests" folder in "PodcastDemoTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PodcastDemo.xctestplan,
+			);
+			target = AD64DD4D2E12FA3E00E89DA8 /* PodcastDemoTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AD64DD402E12FA3D00E89DA8 /* PodcastDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -37,6 +54,10 @@
 		};
 		AD64DD512E12FA3E00E89DA8 /* PodcastDemoTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AD64DEB82E15CB2D00E89DA8 /* Exceptions for "PodcastDemoTests" folder in "PodcastDemo" target */,
+				AD64DEB92E15CB2D00E89DA8 /* Exceptions for "PodcastDemoTests" folder in "PodcastDemoTests" target */,
+			);
 			path = PodcastDemoTests;
 			sourceTree = "<group>";
 		};
