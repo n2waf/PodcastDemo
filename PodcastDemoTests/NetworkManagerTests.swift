@@ -42,4 +42,17 @@ final class NetworkManagerTests: XCTestCase {
         XCTAssertEqual(received.sections.count, expected.sections.count)
     }
 
+    func test_get_onHTTP200_withNonEmptyJSON() async throws {
+        let expected = MockData.sampleHomeResponse
+        let data = try JSONEncoder().encode(expected)
+        let response  = MockData.sample200HTTPURLResponse
+        
+        URLProtocolStub.stub(data: data, response: response, error: nil)
+
+        let received = try await NetworkManager.makeStubbed().get(HomeResponse.self,
+                                                                  from: .home(page: 1))
+
+        XCTAssertEqual(received.sections.count, expected.sections.count)
+    }
+    
 }
