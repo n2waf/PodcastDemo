@@ -69,4 +69,20 @@ final class NetworkManagerTests: XCTestCase {
             XCTFail("Unexpected error: \(error)")
         }
     }
+    
+    func test_get_throwsNoData_onEmptyBody() async {
+        URLProtocolStub.stub(data: Data(),
+                             response: MockData.sample200HTTPURLResponse,
+                             error: nil)
+
+        do {
+            _ = try await NetworkManager.makeStubbed().get(HomeResponse.self,
+                                                           from: .home(page: 1))
+            XCTFail("Expected to throw .noData")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .noData)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
 }
