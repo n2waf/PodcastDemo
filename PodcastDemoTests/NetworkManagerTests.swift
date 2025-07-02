@@ -55,4 +55,18 @@ final class NetworkManagerTests: XCTestCase {
         XCTAssertEqual(received.sections.count, expected.sections.count)
     }
     
+    func test_get_ServerError_onNon2xx() async {
+        let response = MockData.createMockResponse(statusCode: 500)
+        URLProtocolStub.stub(data: Data(), response: response, error: nil)
+
+        do {
+            _ = try await NetworkManager.makeStubbed().get(HomeResponse.self,
+                                                           from: .home(page: 1))
+            XCTFail("Expected to throw, but succeeded")
+        } catch let error as NetworkError {
+            XCTAssertEqual(error, .serverError(500))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
 }

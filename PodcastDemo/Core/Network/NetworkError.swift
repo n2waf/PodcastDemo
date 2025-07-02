@@ -30,3 +30,20 @@ extension NetworkError: LocalizedError {
         }
     }
 }
+
+extension NetworkError: Equatable {
+    public static func == (lhs: NetworkError, rhs: NetworkError) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidURL, .invalidURL),
+             (.noData, .noData),
+             (.decodingError, .decodingError):
+            return true
+        case (.serverError(let a), .serverError(let b)):
+            return a == b
+        case (.networkError, .networkError):
+            return true
+        default:
+            return false
+        }
+    }
+}
