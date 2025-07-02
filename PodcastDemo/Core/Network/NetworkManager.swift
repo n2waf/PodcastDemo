@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class NetworkManager {
+class NetworkManager: HTTPClient {
     static let shared = NetworkManager()
     
     private let session: URLSession
@@ -15,8 +15,13 @@ class NetworkManager {
         self.session = URLSession.shared
     }
     
-    func fetch<T: Codable>(_ type: T.Type, from url: URL) async throws -> T {
+    func get<T: Codable>(_ type: T.Type, from api: API) async throws -> T {
         do {
+            
+            guard let url = api.url else {
+                throw NetworkError.invalidURL
+            }
+            
             let (data, response) = try await session.data(from: url)
             
             guard let httpResponse = response as? HTTPURLResponse else {

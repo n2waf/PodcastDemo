@@ -58,13 +58,9 @@ class HomeViewModel: ObservableObject {
     }
     
     private func fetchSections(page: Int, isInitialLoad: Bool) async {
-        guard let url = APIEndpoints.homeSectionsURL(page: page) else {
-            print("Invalid URL")
-            return
-        }
-        
+
         do {
-            let response = try await networkManager.fetch(HomeResponse.self, from: url)
+            let response = try await networkManager.get(HomeResponse.self, from: .home(page: page))
             
             if isInitialLoad {
                 sections = sortSectionsWithQueueFirst(response.sections)
