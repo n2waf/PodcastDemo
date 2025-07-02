@@ -42,6 +42,14 @@ struct HomeView: View {
                 await viewModel.loadHomeSections()
             }
             .navigationTitle("Home")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SearchView()) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                    .accessibilityLabel("Search")
+                }
+            }
             .onAppear {
                 Task {
                     await viewModel.loadHomeSections()
