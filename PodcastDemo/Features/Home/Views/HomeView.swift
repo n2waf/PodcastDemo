@@ -38,6 +38,9 @@ struct HomeView: View {
                     }
                 }
             }
+            .refreshable {
+                await viewModel.loadHomeSections()
+            }
             .navigationTitle("Home")
             .onAppear {
                 Task {

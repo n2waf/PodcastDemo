@@ -19,15 +19,22 @@ class HomeViewModel: ObservableObject {
     private var currentPage = 1
     private var totalPages = 1
     private var isCurrentlyLoading = false
+    private var currentTask: Task<Void, Never>?
     
     func loadHomeSections() async {
+        currentTask?.cancel()
+        
         guard !isCurrentlyLoading else { return }
         
         isCurrentlyLoading = true
         isLoading = true
         currentPage = 1
         
-        await fetchSections(page: currentPage, isInitialLoad: true)
+        currentTask = Task {
+            await fetchSections(page: currentPage, isInitialLoad: true)
+        }
+        
+        await currentTask?.value
         
         isLoading = false
         isCurrentlyLoading = false
